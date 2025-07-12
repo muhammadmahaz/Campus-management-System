@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard - CMS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo">Teacher CMS</div>
+            <nav>
+                <ul>
+                    <li data-section="overview" class="active">📊 Overview</li>
+                    <li data-section="manage-attendance">Attendance</li>
+                    <li data-section="upload-results">Upload Results</li>
+                    <li data-section="post-announcements">Post Announcements</li>
+                    <li data-section="profile">👤 Profile</li>
+                    <li><button id="logoutBtn">🚪 Logout</button></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header>
+                <h1>Welcome, <span id="userDisplayName"></span>!</h1>
+                <div class="header-actions">
+                    <div id="notificationBell" class="notification-bell">🔔 <span class="badge" id="notificationCount">0</span></div>
+                    <div id="notificationDropdown" class="notification-dropdown"></div>
+                </div>
+            </header>
+
+            <section id="overview" class="dashboard-section">
+                <h2>Dashboard Overview</h2>
+                <p>Welcome to your Teacher Dashboard. Here you can manage attendance, upload results, and post announcements for your courses.</p>
+                </section>
+
+            <section id="manage-attendance" class="dashboard-section hidden">
+                <h2>Mark Attendance</h2>
+                <div class="search-filter">
+                    <label for="attendanceCourseSelect">Select Course:</label>
+                    <select id="attendanceCourseSelect">
+                        <option value="">Loading courses...</option>
+                    </select>
+                    <label for="attendanceDate">Date:</label>
+                    <input type="date" id="attendanceDate">
+                </div>
+                <p id="attendanceMessage" class="message"></p>
+                <table id="attendanceTable">
+                    <thead>
+                        <tr>
+                            <th>Student ID</th>
+                            <th>Student Name</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendanceStudentsTable">
+                        </tbody>
+                </table>
+                <button id="saveAttendanceBtn">Save Attendance</button>
+            </section>
+
+            <section id="upload-results" class="dashboard-section hidden">
+                <h2>Upload Results</h2>
+                <div class="form-group">
+                    <label for="uploadResultsCourseSelect">Select Course:</label>
+                    <select id="uploadResultsCourseSelect">
+                        <option value="">Loading courses...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="uploadResultsStudentSelect">Select Student:</label>
+                    <select id="uploadResultsStudentSelect">
+                        <option value="">Select a course first</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="resultScore">Score:</label>
+                    <input type="number" id="resultScore" placeholder="e.g., 85" min="0" max="100">
+                </div>
+                <div class="form-group">
+                    <label for="resultGrade">Grade:</label>
+                    <input type="text" id="resultGrade" placeholder="e.g., A+, B-">
+                </div>
+                <button id="saveResultBtn">Upload Result</button>
+                <p id="uploadResultsMessage" class="message"></p>
+            </section>
+
+            <section id="post-announcements" class="dashboard-section hidden">
+                <h2>Post New Announcement</h2>
+                <div class="form-group">
+                    <label for="announcementTitle">Title:</label>
+                    <input type="text" id="announcementTitle" placeholder="e.g., Exam Postponement">
+                </div>
+                <div class="form-group">
+                    <label for="announcementMessage">Message:</label>
+                    <textarea id="announcementMessage" rows="5" placeholder="Enter announcement details..."></textarea>
+                </div>
+                <button id="postAnnouncementBtn">Post Announcement</button>
+                <p id="announcementPostMessage" class="message"></p>
+            </section>
+
+            <section id="profile" class="dashboard-section hidden">
+                <h2>Your Profile</h2>
+                <img id="profileImage" src="https://via.placeholder.com/150/CCCCCC/888888?text=Profile" alt="Profile Picture">
+                <input type="file" id="profileImageUpload" accept="image/*">
+                <div class="profile-info">
+                    <p>Name: <span id="profileName"></span></p>
+                    <p>Email: <span id="profileEmail"></span></p>
+                    <p>Role: <span id="profileRole"></span></p>
+                </div>
+                <button id="updateProfileBtn">Update Profile Name</button>
+                <p id="profileMessage" class="message"></p>
+            </section>
+
+        </main>
+    </div>
+
+    <script type="module" src="js/api.js"></script>
+    <script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

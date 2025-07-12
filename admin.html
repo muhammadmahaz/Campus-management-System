@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - CMS</title>
+    <link rel="stylesheet" href="css/style.css">
+    </head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo">Admin CMS</div>
+            <nav>
+                <ul>
+                    <li data-section="overview" class="active">📊 Overview</li>
+                    <li data-section="manage-students">🧑‍🎓 Manage Students</li>
+                    <li data-section="manage-teachers">🧑‍🏫 Manage Teachers</li>
+                    <li data-section="assign-courses">📚 Assign Courses</li>
+                    <li data-section="reports">📈 View Reports</li>
+                    <li data-section="profile">👤 Profile</li>
+                    <li><button id="logoutBtn">🚪 Logout</button></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header>
+                <h1>Welcome, <span id="userDisplayName"></span>!</h1>
+                <div class="header-actions">
+                    <div id="notificationBell" class="notification-bell">🔔 <span class="badge" id="notificationCount">0</span></div>
+                    <div id="notificationDropdown" class="notification-dropdown"></div>
+                </div>
+            </header>
+
+            <section id="overview" class="dashboard-section">
+                <h2>Dashboard Overview</h2>
+                <p>Welcome to the Admin Dashboard. Here you can manage students, teachers, courses, and view reports.</p>
+                </section>
+
+            <section id="manage-students" class="dashboard-section hidden">
+                <h2>Manage Students</h2>
+                <button id="addStudentBtn">Add New Student</button>
+                <div class="search-filter">
+                    <input type="text" id="studentSearch" placeholder="Search by ID, Name or Email">
+                    <button id="applyStudentFilter">Search</button>
+                </div>
+                <table id="studentTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Age</th>
+                            <th>Major</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        </tbody>
+                </table>
+            </section>
+
+            <section id="manage-teachers" class="dashboard-section hidden">
+                <h2>Manage Teachers</h2>
+                <button id="addTeacherBtn">Add New Teacher</button>
+                <div class="search-filter">
+                    <input type="text" id="teacherSearch" placeholder="Search by ID, Name or Email">
+                    <button id="applyTeacherFilter">Search</button>
+                </div>
+                <table id="teacherTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Department</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        </tbody>
+                </table>
+            </section>
+
+            <section id="assign-courses" class="dashboard-section hidden">
+                <h2>Assign Courses to Students</h2>
+                <button id="openAssignCourseModalBtn">Assign Course</button>
+                <p style="margin-top: 15px;">List of assigned courses could go here, or managed via student/teacher profiles.</p>
+                </section>
+
+            <section id="reports" class="dashboard-section hidden">
+                <h2>View Reports</h2>
+                <p>This section will display various statistical reports related to student enrollment, attendance, grades, and teacher loads.</p>
+                </section>
+
+            <section id="profile" class="dashboard-section hidden">
+                <h2>Your Profile</h2>
+                <img id="profileImage" src="https://via.placeholder.com/150/CCCCCC/888888?text=Profile" alt="Profile Picture">
+                <input type="file" id="profileImageUpload" accept="image/*">
+                <div class="profile-info">
+                    <p>Name: <span id="profileName"></span></p>
+                    <p>Email: <span id="profileEmail"></span></p>
+                    <p>Role: <span id="profileRole"></span></p>
+                </div>
+                <button id="updateProfileBtn">Update Profile Name</button>
+                <p id="profileMessage" class="message"></p>
+            </section>
+
+        </main>
+    </div>
+
+    <div id="studentModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3 id="studentFormTitle">Add New Student</h3>
+            <div class="form-group">
+                <label for="studentIdInput">Student ID:</label>
+                <input type="text" id="studentIdInput" placeholder="S001" required>
+            </div>
+            <div class="form-group">
+                <label for="studentNameInput">Full Name:</label>
+                <input type="text" id="studentNameInput" placeholder="John Doe" required>
+            </div>
+            <div class="form-group">
+                <label for="studentEmailInput">Email:</label>
+                <input type="email" id="studentEmailInput" placeholder="john.doe@example.com" required>
+            </div>
+            <div class="form-group">
+                <label for="studentAgeInput">Age:</label>
+                <input type="number" id="studentAgeInput" placeholder="20">
+            </div>
+            <div class="form-group">
+                <label for="studentMajorInput">Major:</label>
+                <input type="text" id="studentMajorInput" placeholder="Computer Science">
+            </div>
+            <button id="saveStudentBtn">Save Student</button>
+        </div>
+    </div>
+
+    <div id="teacherModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3 id="teacherFormTitle">Add New Teacher</h3>
+            <div class="form-group">
+                <label for="teacherIdInput">Teacher ID:</label>
+                <input type="text" id="teacherIdInput" placeholder="T001" required>
+            </div>
+            <div class="form-group">
+                <label for="teacherNameInput">Full Name:</label>
+                <input type="text" id="teacherNameInput" placeholder="Jane Smith" required>
+            </div>
+            <div class="form-group">
+                <label for="teacherEmailInput">Email:</label>
+                <input type="email" id="teacherEmailInput" placeholder="jane.smith@example.com" required>
+            </div>
+            <div class="form-group">
+                <label for="teacherDeptInput">Department:</label>
+                <input type="text" id="teacherDeptInput" placeholder="Mathematics">
+            </div>
+            <button id="saveTeacherBtn">Save Teacher</button>
+        </div>
+    </div>
+
+    <div id="assignCourseModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>Assign Course to Student</h3>
+            <div class="form-group">
+                <label for="assignCourseStudentSelect">Select Student:</label>
+                <select id="assignCourseStudentSelect" required>
+                    <option value="">Loading students...</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="assignCourseCourseSelect">Select Course:</label>
+                <select id="assignCourseCourseSelect" required>
+                    <option value="">Loading courses...</option>
+                </select>
+            </div>
+            <button id="assignCourseSaveBtn">Assign Course</button>
+        </div>
+    </div>
+
+
+    <script type="module" src="js/api.js"></script>
+    <script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

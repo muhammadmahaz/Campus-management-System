@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Management System - Login/Signup</title>
+    <link rel="stylesheet" href="css/style.css">
+    </head>
+<body>
+    <div class="auth-container">
+        <h2>Welcome to Campus Management System</h2>
+
+        <div class="role-selection">
+            <button id="adminRoleBtn">Admin</button>
+            <button id="teacherRoleBtn">Teacher</button>
+            <button id="studentRoleBtn" class="active">Student</button>
+        </div>
+
+        <div class="auth-form" id="loginForm">
+            <h3>Login</h3>
+            <div class="form-group">
+                <input type="email" id="loginEmail" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="loginPassword" placeholder="Password" required>
+            </div>
+            <button id="loginBtn">Login</button>
+            <p style="margin-top: 15px;">Don't have an account? <a href="#" class="toggle-link" id="showSignup">Sign Up</a></p>
+        </div>
+
+        <div class="auth-form hidden" id="signupForm">
+            <h3>Sign Up</h3>
+            <div class="form-group">
+                <input type="text" id="signupName" placeholder="Full Name" required>
+            </div>
+            <div class="form-group">
+                <input type="email" id="signupEmail" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="signupPassword" placeholder="Password (min 6 chars)" required>
+            </div>
+            <div class="form-group">
+                <select id="signupRole" required>
+                    <option value="student">Student</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+            <button id="signupBtn">Sign Up</button>
+            <p style="margin-top: 15px;">Already have an account? <a href="#" class="toggle-link" id="showLogin">Login</a></p>
+        </div>
+        <p id="authMessage" class="message"></p>
+    </div>
+
+    <script type="module" src="js/api.js"></script>
+    <script type="module" src="js/auth.js"></script>
+</body>
+</html>
